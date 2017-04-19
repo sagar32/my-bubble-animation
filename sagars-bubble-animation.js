@@ -1,7 +1,14 @@
 var sagarsBubble = (function () {
     var myStyleSheetElem;
+    var bodyHeight;
+    var bodyWidth;
     return {
         init: function () {
+            //get body
+            bodyHeight = document.body.clientHeight;
+            bodyWidth = document.body.clientWidth;
+            console.log(bodyHeight);
+            console.log(bodyWidth);
             //generate keyframe
             myStyleSheetElem = document.createElement("style");
             document.head.appendChild(myStyleSheetElem);
@@ -12,7 +19,7 @@ var sagarsBubble = (function () {
             var style = 'transform-style: preserve-3d;width: 100%;height: 100%;perspective: 600px;z-index:-1;margin-left:20%;';
             container.setAttribute('class', 'sagarsContainer');
             this.addCSSRule(myStyleSheetElem.sheet, '.sagarsContainer', style, 0);
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < 200; i++) {
                 var bb = this.createBubble();
                 container.appendChild(bb);
             }
@@ -21,11 +28,11 @@ var sagarsBubble = (function () {
         createBubble: function () {
             // create bubble
             var _bubble = document.createElement('div');
-            var translateX = Math.floor(Math.random() * 1500),
-                translateY = Math.floor(Math.random() * 1500),
-                translateZ = Math.floor((Math.random() * 1900) + 200),
-                animationDelay = Math.round((Math.random() * 10) * 100) / 100,
-                dotHeightWidth = Math.floor((Math.random() * 30) + 2);
+            var dotHeightWidth = Math.floor((Math.random() * 30) + 2),
+                translateX = Math.floor(Math.random() * bodyWidth),
+                translateY = Math.floor(Math.random() * bodyHeight),
+                translateZ = Math.floor((Math.random() * (bodyWidth-dotHeightWidth))),
+                animationDelay = Math.round((Math.random() * 10) * 100) / 100;
 
             var style = 'animation: move 3s infinite;background:' + this.getRandomColor() + ';transform: translate3d(' + translateX + 'px, ' + translateY + 'px, ' + translateZ + 'px);animation-delay: -' + animationDelay + 's;width: ' + dotHeightWidth + 'px;height: ' + dotHeightWidth + 'px;position: absolute;opacity: .7;border-radius:50%;';
             var className = "Sagar_" + translateX + translateY;
